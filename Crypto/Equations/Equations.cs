@@ -133,9 +133,9 @@ namespace Crypto
         public static int GetModded(int res, int mod) // надо переписать с оператором %
         {
             while (res < 0)
-                res += mod;
+                res =res%mod + mod;
             while (res > mod)
-                res -= mod;
+                res %= mod;
             return res;
         }
 
