@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ciphers\CipherElGamal.cs" />
+    <Compile Include="ciphers\CipherRSABank.cs" />
     <Compile Include="ciphers\СipherRSA.cs" />
     <Compile Include="Equations\Equations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
