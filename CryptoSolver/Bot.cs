@@ -52,7 +52,8 @@ namespace CryptoSolver
                         await client.SendTextMessageAsync(
                             chatId: msg.Chat.Id,
                             answer,
-                            replyMarkup: GeneralMenu());  
+                            replyMarkup: GeneralMenu());
+                        Path = new List<string>();
                     }
                     catch (FormatException)
                     {
