@@ -60,7 +60,7 @@ namespace CryptoSolver
                               .Select(x => int.Parse(x))
                               .ToArray();
             int[] answer = new int[2];
-            if (arg.Length == 1)
+            if (newdata.Length == 1)
                 answer = Equations.TestDeFermat(newdata[0]);
             else
                 answer = Equations.TestDeFermat(newdata[0], newdata[1]);

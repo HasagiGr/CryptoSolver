@@ -97,7 +97,7 @@ namespace CryptoSolver
                                 case "Быстрое экспоненцирование":
                                     await client.SendTextMessageAsync(
                                         chatId: msg.Chat.Id,
-                                        "Введите x,mod,power");
+                                        "Введите x, mod, количество шагов");
                                     break;
                                 case "y = a^b mod p":
                                     await client.SendTextMessageAsync(
@@ -173,6 +173,7 @@ namespace CryptoSolver
 
 
                             }
+                            Path = new List<string>();
                             break;
                     }
                 }
