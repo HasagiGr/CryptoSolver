@@ -14,11 +14,14 @@ namespace CryptoSolver
     public class Bot
     {
         private static string Token { get; set; } = "5085494689:AAFBmzjJiSRspQk_XM9XGUh3iYjrE7F9H_w";
+
         private static TelegramBotClient client;
+
         private static bool isAnyOtherMessage = true;
-        public static List<string> Path { get; set; } = new List<string>();
 
         private static Dictionary<string, Func<string, string>> dictMethods = new DictionaryMethods().dict;
+
+        private static Dictionary<Telegram.Bot.Types.ChatId, List<string>> UsersPath = new Dictionary<Telegram.Bot.Types.ChatId, List<string>>();
 
         public Bot()
         {
@@ -37,23 +40,25 @@ namespace CryptoSolver
         private static async void Client_OnMessage(object sender, MessageEventArgs e)
         {
             var msg = e.Message;
+            if (!UsersPath.ContainsKey(msg.Chat.Id))
+                UsersPath.Add(msg.Chat.Id, new List<string>());
             if (msg.Text != null)
             {
                 // Уровень решений
-                if (Path.Count == 2)
+                if (UsersPath[msg.Chat.Id].Count == 2)
                 {
                     try
                     {
                         var data = msg.Text;
                         data = data.Replace(" ", "");
                         data = Regex.Replace(data, @"[A-Za-z]+", "");
-                        Path.Add(data);
-                        var answer = dictMethods[Path[1]](Path[2]);
+                        UsersPath[msg.Chat.Id].Add(data);
+                        var answer = dictMethods[UsersPath[msg.Chat.Id][1]](UsersPath[msg.Chat.Id][2]);
                         await client.SendTextMessageAsync(
                             chatId: msg.Chat.Id,
                             answer,
                             replyMarkup: GeneralMenu());
-                        Path = new List<string>();
+                        UsersPath[msg.Chat.Id] = new List<string>();
                     }
                     catch (FormatException)
                     {
@@ -61,7 +66,7 @@ namespace CryptoSolver
                                 chatId: msg.Chat.Id,
                                 "Вы ввели неверные значения!",
                                 replyMarkup: GeneralMenu());
-                        Path = new List<string>();
+                        UsersPath[msg.Chat.Id] = new List<string>();
                     }
                     catch (KeyNotFoundException)
                     {
@@ -69,7 +74,7 @@ namespace CryptoSolver
                                 chatId: msg.Chat.Id,
                                 "Продолжишь тыкать и бот умрет!",
                                 replyMarkup: GeneralMenu());
-                        Path = new List<string>();
+                        UsersPath[msg.Chat.Id] = new List<string>();
                     }
                     catch
                     {
@@ -77,16 +82,16 @@ namespace CryptoSolver
                                 chatId: msg.Chat.Id,
                                 "Тебе меня не сломать!",
                                 replyMarkup: GeneralMenu());
-                        Path = new List<string>();
+                        UsersPath[msg.Chat.Id] = new List<string>();
                     }
                 }
                 // Первый уровень
-                if (Path.Count == 1)
+                if (UsersPath[msg.Chat.Id].Count == 1)
                 {
                     try
                     {
                         isAnyOtherMessage = false;
-                        Path.Add(msg.Text);
+                        UsersPath[msg.Chat.Id].Add(msg.Text);
                         var reply = new Second_Level(msg.Text);
                         if (reply.Key.Contains('.'))
                         {
@@ -94,7 +99,7 @@ namespace CryptoSolver
                                             chatId: msg.Chat.Id,
                                             reply.Key,
                                             replyMarkup: GeneralMenu());
-                            Path = new List<string>();
+                            UsersPath[msg.Chat.Id] = new List<string>();
                         }
                         else
                         {
@@ -109,18 +114,18 @@ namespace CryptoSolver
                                 chatId: msg.Chat.Id,
                                 "Дебил, с кнопочек выбери!",
                                 replyMarkup: GeneralMenu());
-                        Path = new List<string>();
+                        UsersPath[msg.Chat.Id] = new List<string>();
 
                     }
                 }
 
-                if (Path.Count == 0) //Начало работы
+                if (UsersPath[msg.Chat.Id].Count == 0) //Начало работы
                 {
                     isAnyOtherMessage = false;
                     switch (msg.Text)
                     {
                         case "Шифры":
-                            Path.Add(msg.Text);
+                            UsersPath[msg.Chat.Id].Add(msg.Text);
                             var Ciphers = await client.SendTextMessageAsync(
                                 chatId: msg.Chat.Id,
                                 "Выберите нужный шифр",
@@ -129,7 +134,7 @@ namespace CryptoSolver
 
 
                         case "Свойства":
-                            Path.Add(msg.Text);
+                            UsersPath[msg.Chat.Id].Add(msg.Text);
                             var prop = await client.SendTextMessageAsync(
                                 chatId: msg.Chat.Id,
                                 "Выберите нужную информацию",
@@ -137,14 +142,14 @@ namespace CryptoSolver
                             break;
 
                         case "Калькулятор":
-                            Path.Add(msg.Text);
+                            UsersPath[msg.Chat.Id].Add(msg.Text);
                             var calc = await client.SendTextMessageAsync(
                                 chatId: msg.Chat.Id,
                                 "Выберите нужный метод",
                                 replyMarkup: GeneralMethodsMenu());
                             break;
                         default:
-                            Path = new List<string>();
+                            UsersPath[msg.Chat.Id] = new List<string>();
                             var answer = await client.SendTextMessageAsync(
                                  chatId: msg.Chat.Id,
                                  "Выберите нужное решение",
@@ -155,7 +160,7 @@ namespace CryptoSolver
 
                 if (isAnyOtherMessage) // проверка в конце, если мы так и не нашли нужный ход
                 {
-                    Path = new List<string>();
+                    UsersPath[msg.Chat.Id] = new List<string>();
                     var answer = await client.SendTextMessageAsync(
                          chatId: msg.Chat.Id,
                          "Выберите нужное решение",
