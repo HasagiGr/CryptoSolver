@@ -104,7 +104,7 @@ namespace CryptoSolver
                                .ToArray();
             int answer = 1;
             string str;
-            if (arg.Length == 1)
+            if (newdata.Length == 1)
             {
                 answer = Equations.MinimalCycleGroup(newdata[0]);
                 str = String.Format("{0} = минимальная циклическая группа поля {1}", answer, newdata[0]);
