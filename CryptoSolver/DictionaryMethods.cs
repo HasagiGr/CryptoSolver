@@ -146,7 +146,7 @@ namespace CryptoSolver
                                .ToArray();
             var answer = Equations.FastExp(newdata[0], newdata[1], newdata[2]);
             var str = new StringBuilder();
-            var i = 1;
+            var i = 0;
             foreach (var prime in answer)
             {
 
