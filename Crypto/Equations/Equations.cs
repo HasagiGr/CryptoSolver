@@ -88,7 +88,7 @@ namespace Crypto
 
         //Euler function
         #region 
-        static int Gcd(int a, int b)
+        public static int Gcd(int a, int b)
         {
             if (a == 0)
                 return b;

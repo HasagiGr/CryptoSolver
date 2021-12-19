@@ -41,6 +41,17 @@ namespace CryptoSolver
 
             dict.Add("Обратный элемент", AnswerForRevEl);
 
+            dict.Add("НОД", AnswerForGCD);
+        }
+
+        private string AnswerForGCD(string arg)
+        {
+            var newdata = arg
+                                 .Split(',', ' ')
+                                 .Select(x => int.Parse(x))
+                                 .ToArray();
+            var answer = Equations.Gcd(newdata[0], newdata[1]);
+            return String.Format("({0},{1})={2}", newdata[0], newdata[1], answer);
         }
 
         private string AnswerForRevEl(string arg)

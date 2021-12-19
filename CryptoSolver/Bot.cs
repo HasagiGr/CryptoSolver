@@ -194,7 +194,7 @@ namespace CryptoSolver
                     new List<KeyboardButton>{ new KeyboardButton {Text = "y = a^b mod p"}, new KeyboardButton {Text = "y = a*b mod p" } },
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Минимальная циклическая группа"}, new KeyboardButton {Text = "Метод тривиальных(простых) делений" } },
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Метод Ферма"}, new KeyboardButton {Text = "Тест Ферма" } },
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "Обратный элемент"} }
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "Обратный элемент"}, new KeyboardButton { Text = "НОД" } }
                 }
             };
         }
