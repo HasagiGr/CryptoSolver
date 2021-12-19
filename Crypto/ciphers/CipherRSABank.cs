@@ -48,11 +48,8 @@ namespace Crypto
 
         public bool IsCorrect()
         {
-            if (this.Message == this.Z)
-            {
-                return true;
-            }
-            return false;
+            
+            return this.Message == this.Z;
         }
 
     }
