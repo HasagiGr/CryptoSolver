@@ -50,6 +50,15 @@ namespace CryptoSolver
             dict.Add("Решение системы сравнений", AnswerSystemComp);
 
             dict.Add("RSABank", AnswerForRSABank);
+
+            dict.Add("Функция Эйлера", AnswerForPhi);
+        }
+
+        private string AnswerForPhi(string arg)
+        {
+            var newdata = int.Parse(arg);
+            var answer = Equations.Phi(newdata);
+            return String.Format("phi({0}) = {1}", newdata, answer);
         }
 
         private string AnswerForRSABank(string arg)
