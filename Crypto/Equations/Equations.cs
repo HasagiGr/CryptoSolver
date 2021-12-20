@@ -167,6 +167,16 @@ namespace Crypto
             return sum;
         }
 
+        public static int[] Probability(double a, double b) //Размер хеша и количество подборов для коллизии
+        {
+            int m = 0;
+            int t = 0;
+            var prob = Math.Pow(a, -b);
+            m = (int) Math.Ceiling(Math.Log(prob, 2));
+            t = (int)Math.Ceiling(Math.Sqrt(2 * prob));
+            return new int[] { m, t };
+        }
+
         public static int MinimalCycleGroup(int field, int p=1) // Определение минимальной циклической подгруппы, образующей группу, большей чем p 
         {
             var primeNumbers = Equations.GetPrimeFactors(field - 1);
