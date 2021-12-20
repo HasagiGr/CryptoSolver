@@ -88,7 +88,7 @@ namespace CryptoSolver
                                  .Select(x => double.Parse(x))
                                  .ToArray();
             var answer = Equations.Probability(newdata[0], newdata[1]);
-            return String.Format("Для вероятности {0}^{1} размер хеша равен {2}, количество необходимых подборов 1,41*10^{3}", newdata[0], newdata[1], answer[0], answer[1]);
+            return String.Format("Для вероятности {0}^{1} размер хеша равен {2}, количество необходимых подборов {4}*10^{3}", newdata[0], newdata[1], answer[0], answer[2],answer[1]);
         }
         
         private string AnswerForGCD(string arg)
