@@ -42,8 +42,18 @@ namespace CryptoSolver
             dict.Add("Обратный элемент", AnswerForRevEl);
 
             dict.Add("НОД", AnswerForGCD);
-        }
 
+            dict.Add("Размер хеша и вероятность повторения", AnswerForHash);
+        }
+        private string AnswerForHash(string arg)
+        {
+            var newdata = arg
+                                 .Split(',', ' ')
+                                 .Select(x => double.Parse(x))
+                                 .ToArray();
+            var answer = Equations.Probability(newdata[0], newdata[1]);
+            return String.Format("Для вероятности {0}^{1} размер хеша равен {2}, количество необходимых подборов {3}", newdata[0], newdata[1], answer[0], answer[1]);
+        }
         private string AnswerForGCD(string arg)
         {
             var newdata = arg
