@@ -161,18 +161,18 @@ namespace CryptoSolver
                                .Select(x => int.Parse(x))
                                .ToArray();
             int answer = 1;
-            string str;
+            string str = String.Format("поле {0} не имеет циклических групп",newdata[0]);
             if (newdata.Length == 1)
             {
                 answer = Equations.MinimalCycleGroup(newdata[0]);
-                str = String.Format("{0} = минимальная циклическая группа поля {1}", answer, newdata[0]);
+                if (answer!=-1) str = String.Format("{0} - минимальная циклическая группа поля {1}", answer, newdata[0]);
             }
-            else if (newdata[0] > newdata[1])
+            else 
             {
                 answer = Equations.MinimalCycleGroup(newdata[0], newdata[1]);
-                str = String.Format("{0} = циклическая группа поля {1}", answer, newdata[0]);
+                if (answer != -1) str = String.Format("{0} - циклическая группа поля {1}", answer, newdata[0]);
             }
-            return String.Format("{0} - циклическая группа поля {1}", answer, newdata[0]);
+            return str;
         }
 
         private string AnswerForMultiply(string arg)
