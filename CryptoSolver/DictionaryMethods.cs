@@ -44,7 +44,43 @@ namespace CryptoSolver
             dict.Add("НОД", AnswerForGCD);
 
             dict.Add("Размер хеша и вероятность повторения", AnswerForHash);
+            
+             dict.Add("Решение сравнения", AnswerForComp);
+
+            dict.Add("Решение системы сравнений", AnswerSystemComp);
         }
+        
+        private string AnswerForComp(string arg)
+        {
+            var newdata = arg
+                                  .Split(',', ' ')
+                                  .Select(x => int.Parse(x))
+                                  .ToArray();
+            var answer = Equations.SolveComparison(newdata[0], newdata[1], newdata[2]);
+            if (answer != new int[] { -1 })
+            {
+                var str = new StringBuilder();
+                for (int i = 0; i < answer.Length; i++)
+                    str.Append(String.Format("{0} ", answer[0]));
+                return str.ToString();
+            }
+            else
+                return "Сравнение не имеет решений";
+        }
+
+        private string AnswerSystemComp(string arg)
+        {
+            var newdata = arg
+                                  .Split(',', ' ')
+                                  .Select(x => int.Parse(x))
+                                  .ToArray();
+            var answer = Equations.SolveSystemOfComp(newdata);
+            if (answer != -1)
+                return String.Format("{0} - решение системы сравнений", answer);
+            else
+                return "Система не имеет решений";
+        }
+        
         private string AnswerForHash(string arg)
         {
             var newdata = arg
@@ -54,6 +90,7 @@ namespace CryptoSolver
             var answer = Equations.Probability(newdata[0], newdata[1]);
             return String.Format("Для вероятности {0}^{1} размер хеша равен {2}, количество необходимых подборов {3}", newdata[0], newdata[1], answer[0], answer[1]);
         }
+        
         private string AnswerForGCD(string arg)
         {
             var newdata = arg
