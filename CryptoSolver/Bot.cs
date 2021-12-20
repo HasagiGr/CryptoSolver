@@ -21,6 +21,16 @@ namespace CryptoSolver
 
         private static Dictionary<string, Func<string, string>> dictMethods = new DictionaryMethods().dict;
 
+        private static List<string> users = new List<string> { "856666159",
+                                                               "351690797",
+                                                               "180130508",
+                                                               "172118570",
+                                                               "304009654",
+                                                               "265796049",
+                                                               "906858199",
+                                                               "496988839"};
+
+
         private static Dictionary<Telegram.Bot.Types.ChatId, List<string>> UsersPath = new Dictionary<Telegram.Bot.Types.ChatId, List<string>>();
 
         public Bot()
@@ -40,6 +50,8 @@ namespace CryptoSolver
         private static async void Client_OnMessage(object sender, MessageEventArgs e)
         {
             var msg = e.Message;
+            if (!users.Contains(msg.Chat.Id.ToString()))
+                return;
             if (!UsersPath.ContainsKey(msg.Chat.Id))
                 UsersPath.Add(msg.Chat.Id, new List<string>());
             if (msg.Text != null)
