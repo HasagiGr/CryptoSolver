@@ -60,6 +60,19 @@ namespace Crypto
             return -1;
         }
 
+        public static double MistakeRSA(int number)
+        {
+            var primes = GetPrimeFactors(number);
+            if (primes.Length!=2)
+            {
+                return -1;
+            }
+            else
+            {
+                return Math.Pow(primes[0],-1)+Math.Pow(primes[1],-1);
+            }
+        }
+
         public static int[] GetPrimeFactors(int number)
         {
             var list = new List<int>();
