@@ -202,5 +202,59 @@ namespace Crypto
             }
             return -1;
         }
+        
+        public static int[] SolveComparison(int a, int b, int mod) // Решение сравнения
+        {
+            while (a > mod)
+                a -= mod;
+            var solvNumber = Gcd(a, mod);
+            if (b % solvNumber == 0)
+            {
+                a /= solvNumber;
+                b /= solvNumber;
+                mod /= solvNumber;
+            }
+            var answer = new List<int>();
+            for (int i = 1; i < mod; i++)
+            {
+                if (a * i % mod == b)
+                    answer.Add(i);
+            }
+            if (answer.Count != 0) for (var i = 1; i < solvNumber; i++)
+                    answer.Add(answer[0] + mod * i);
+            return answer.Count != 0 ? answer.ToArray() : new int[] { -1 };
+        }
+
+        public static int SolveSystemOfComp(int[] data) //Решение системы сравнений
+        {
+            if (data.Length % 3 != 0)
+                return -1;
+            int m = 1;
+            for (int i = 0; i < data.Length / 3; i++)
+            {
+                m *= data[2 + i * 3];
+                if (data[0 + i * 3] == 1) continue;
+                else
+                {
+                    var d = new ReversingEl(data[2 + i * 3], data[0 + i * 3]).CheckRes();
+                    data[0 + i * 3] = 1;
+                    data[1 + i * 3] = data[1 + i * 3] * d % data[2 + i * 3];
+                }
+            }
+            var phi = new int[data.Length / 3];
+            var reversed = new int[data.Length / 3];
+            for (int i = 0; i < data.Length / 3; i++)
+            {
+                phi[i] = m / data[2 + i * 3];
+                if (Equations.GetModded(phi[i], data[2 + i * 3]) == 0) return -1;
+                reversed[i] = new ReversingEl(data[2 + i * 3], Equations.GetModded(phi[i], data[2 + i * 3])).CheckRes();
+            }
+            var result = 0;
+            for (int i = 0; i < data.Length / 3; i++)
+            {
+                result += phi[i] * reversed[i] * data[1 + i * 3];
+            }
+            return Equations.GetModded(result,m);
+        }
     }
 }
