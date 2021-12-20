@@ -173,7 +173,7 @@ namespace Crypto
             int t = 0;
             var prob = Math.Pow(a, -b);
             m = (int) Math.Ceiling(Math.Log(prob, 2));
-            t = (int)Math.Ceiling(Math.Sqrt(2 * prob));
+            t = -(int)b / 2;
             return new int[] { m, t };
         }
 
