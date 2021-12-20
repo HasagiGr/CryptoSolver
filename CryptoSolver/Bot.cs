@@ -93,7 +93,7 @@ namespace CryptoSolver
                         isAnyOtherMessage = false;
                         UsersPath[msg.Chat.Id].Add(msg.Text);
                         var reply = new Second_Level(msg.Text);
-                        if (reply.Key.Contains('.'))
+                        if (reply.Key.Contains("http"))
                         {
                             await client.SendTextMessageAsync(
                                             chatId: msg.Chat.Id,
@@ -195,6 +195,7 @@ namespace CryptoSolver
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Минимальная циклическая группа"}, new KeyboardButton {Text = "Метод тривиальных(простых) делений" } },
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Метод Ферма"}, new KeyboardButton {Text = "Тест Ферма" } },
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Обратный элемент"}, new KeyboardButton { Text = "НОД" } },
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "Решение сравнения"}, new KeyboardButton { Text = "Решение системы сравнений" },
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Размер хеша и вероятность повторения"} }
                 }
             };
