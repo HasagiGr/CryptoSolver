@@ -25,6 +25,7 @@ namespace CryptoSolver
         {
             dict.Add("RSA", "Введите данные в фомате x,n,e");
             dict.Add("El Gamal", "Введите данные в фомате x,n,q,r");
+            dict.Add("RSABank", "Введите данные в формате E, N, e, n, message, type (type = 0 :  Клиент Банку, type = 1 : Банк Клиенту)");
             dict.Add("Разложение на множители", "Введите x");
             dict.Add("Быстрое экспоненцирование", "Введите x, mod, количество шагов");
             dict.Add("y = a^b mod p", "Введите a,b,p");

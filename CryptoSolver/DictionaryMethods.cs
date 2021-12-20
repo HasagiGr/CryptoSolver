@@ -48,8 +48,22 @@ namespace CryptoSolver
              dict.Add("Решение сравнения", AnswerForComp);
 
             dict.Add("Решение системы сравнений", AnswerSystemComp);
+
+            dict.Add("RSABank", AnswerForRSABank);
         }
-        
+
+        private string AnswerForRSABank(string arg)
+        {
+            var newdata = arg
+                                     .Split(',', ' ')
+                                     .Select(x => int.Parse(x))
+                                     .ToArray();
+            if (newdata.Length==5)
+                return new CipherRSABank(newdata[0], newdata[1], newdata[2], newdata[3], newdata[4]).GetRightStrings();
+            else
+                return new CipherRSABank(newdata[0], newdata[1], newdata[2], newdata[3], newdata[4],newdata[5]).GetRightStrings();
+        }
+
         private string AnswerForComp(string arg)
         {
             var newdata = arg

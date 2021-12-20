@@ -112,7 +112,7 @@ namespace CryptoSolver
                     {
                         await client.SendTextMessageAsync(
                                 chatId: msg.Chat.Id,
-                                "Дебил, с кнопочек выбери!",
+                                "Тыкай по кнопочкам!",
                                 replyMarkup: GeneralMenu());
                         UsersPath[msg.Chat.Id] = new List<string>();
 
@@ -207,7 +207,8 @@ namespace CryptoSolver
             {
                 Keyboard = new List<List<KeyboardButton>>()
                 {
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "RSA"}, new KeyboardButton {Text = "El Gamal"} }
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "RSA"}, new KeyboardButton {Text = "El Gamal"} },
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "RSABank"} }
                 }
             };
         }
