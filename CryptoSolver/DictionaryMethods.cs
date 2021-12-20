@@ -22,6 +22,8 @@ namespace CryptoSolver
 
             dict.Add("El Gamal", AnswerForElGamal);
 
+            dict.Add("RSABank", AnswerForRSABank);
+
             //калькулятор
             dict.Add("Разложение на множители", AnswerForDiv);
 
@@ -49,18 +51,22 @@ namespace CryptoSolver
 
             dict.Add("Решение системы сравнений", AnswerSystemComp);
 
-            dict.Add("RSABank", AnswerForRSABank);
-
-            dict.Add("Функция Эйлера", AnswerForPhi);
+            dict.Add("Вероятность некорректной шифровки", AnswerForMistakeRSA);
         }
 
-        private string AnswerForPhi(string arg)
+        private string AnswerForMistakeRSA(string arg)
         {
-            var newdata = int.Parse(arg);
-            var answer = Equations.Phi(newdata);
-            return String.Format("phi({0}) = {1}", newdata, answer);
+            var data = int.Parse(arg);
+            var possibleanswer = Equations.MistakeRSA(data);
+            if (possibleanswer==-1)
+            {
+                return "Данное число раскладывается более чем на 2 множителя и не может быть использовано как модуль";
+            }
+            else
+            {
+                return String.Format("Для модуля {0} вероятность некорректной шифровки равна {1:0.0000}", arg, possibleanswer);
+            }
         }
-
         private string AnswerForRSABank(string arg)
         {
             var newdata = arg

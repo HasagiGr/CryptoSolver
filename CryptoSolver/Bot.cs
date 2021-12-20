@@ -28,9 +28,7 @@ namespace CryptoSolver
                                                                "304009654",
                                                                "265796049",
                                                                "906858199",
-                                                               "496988839",
-                                                               "935724041",
-                                                               "407858513"};
+                                                               "496988839"};
 
 
         private static Dictionary<Telegram.Bot.Types.ChatId, List<string>> UsersPath = new Dictionary<Telegram.Bot.Types.ChatId, List<string>>();
@@ -205,12 +203,12 @@ namespace CryptoSolver
                 Keyboard = new List<List<KeyboardButton>>()
                 {
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Разложение на множители"}, new KeyboardButton {Text = "Быстрое экспоненцирование" } },
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "y = a^b mod p"}, new KeyboardButton {Text = "y = a*b mod p" } },
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "y = a^b mod p"}, new KeyboardButton {Text = "y = a*b mod p" }, new KeyboardButton {Text = "Решение сравнения"},},
                     new List<KeyboardButton>{ new KeyboardButton {Text = "Минимальная циклическая группа"}, new KeyboardButton {Text = "Метод тривиальных(простых) делений" } },
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "Метод Ферма"}, new KeyboardButton {Text = "Тест Ферма" } },
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "Обратный элемент"}, new KeyboardButton { Text = "НОД" } },
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "Решение сравнения"}, new KeyboardButton { Text = "Решение системы сравнений" } },
-                    new List<KeyboardButton>{ new KeyboardButton {Text = "Размер хеша и вероятность повторения"}, new KeyboardButton { Text = "Функция Эйлера" } }
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "Метод Ферма"}, new KeyboardButton {Text = "Тест Ферма" } , new KeyboardButton { Text = "НОД" }},
+                    new List<KeyboardButton>{ new KeyboardButton {Text = "Обратный элемент"}, new KeyboardButton { Text = "Решение системы сравнений" },  },
+                    new List<KeyboardButton>{  new KeyboardButton {Text = "Размер хеша и вероятность повторения"} },
+                    new List<KeyboardButton>{ new KeyboardButton { Text = "Вероятность некорректной шифровки" } }
                 }
             };
         }
