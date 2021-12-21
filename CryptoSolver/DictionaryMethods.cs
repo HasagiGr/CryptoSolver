@@ -52,6 +52,15 @@ namespace CryptoSolver
             dict.Add("Решение системы сравнений", AnswerSystemComp);
 
             dict.Add("Вероятность некорректной шифровки", AnswerForMistakeRSA);
+
+            dict.Add("Функция Эйлера", AnswerForPhi);
+        }
+
+        private string AnswerForPhi(string arg)
+        {
+            var data = int.Parse(arg);
+            var answer = Equations.Phi(data);
+            return String.Format("phi({0}) = {1}", data, answer);
         }
 
         private string AnswerForMistakeRSA(string arg)

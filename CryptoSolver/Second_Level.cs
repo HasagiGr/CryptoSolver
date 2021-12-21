@@ -40,6 +40,7 @@ namespace CryptoSolver
             dict.Add("Решение сравнения", "ax = b (mod m), введите а,b,m");
             dict.Add("Вероятность некорректной шифровки", "Введите модуль m");
             dict.Add("Решение системы сравнений", "an*xn = bn (mod mn), введите a1, b1, m1,.., an, bn, mn");
+            dict.Add("Функция Эйлера", "Введите число");
             dict.Add("Свойства RSA", "https://sun9-52.userapi.com/impg/77trFRESV5SsqXglyWd19QbNtCU1og0x7-TD_A/wczzEj7N5mE.jpg?size=755x1075&quality=96&sign=3cfb442d84f79146d3f29104cb77a6cc&type=album");
             dict.Add("Свойства El Gamal", "https://sun9-8.userapi.com/impg/ie5AxO8oi-ZygXgj2mZw-qQPjj6bJCV7kyhrYw/H5RgztICWNY.jpg?size=743x626&quality=96&sign=1204a3f13c8bb2485f99143c3cd8c411&type=album");
             dict.Add("Свойства сравнений", "https://sun9-67.userapi.com/impg/0090ne0xZ709xwNjtCaGnAg4hu3PTXhXe9hQig/x69TBhFDzB0.jpg?size=738x517&quality=96&sign=9c7acc8e9b6316c6fac0f7177e67f023&type=album");
