@@ -99,7 +99,7 @@ namespace CryptoSolver
             {
                 var str = new StringBuilder();
                 for (int i = 0; i < answer.Length; i++)
-                    str.Append(String.Format("{0} ", answer[0]));
+                    str.Append(String.Format("{0} ", answer[i]));
                 return str.ToString();
             }
             else
