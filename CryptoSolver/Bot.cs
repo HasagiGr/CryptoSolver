@@ -13,7 +13,7 @@ namespace CryptoSolver
 {
     public class Bot
     {
-        private static string Token { get; set; } = "5085494689:AAFBmzjJiSRspQk_XM9XGUh3iYjrE7F9H_w";
+        private static string Token { get; set; } = "5085494689:AAExVHwOPFr9JKjbiYvRpzRWTtYzuLg8R-k";
 
         private static TelegramBotClient client;
 
