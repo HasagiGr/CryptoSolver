@@ -32,7 +32,8 @@ namespace CryptoSolver
                                                                "935724041",
                                                                "407858513",
                                                                "525927282",
-                                                               "889787893"};
+                                                               "889787893",
+                                                               "325376797"};
 
 
         private static Dictionary<Telegram.Bot.Types.ChatId, List<string>> UsersPath = new Dictionary<Telegram.Bot.Types.ChatId, List<string>>();
