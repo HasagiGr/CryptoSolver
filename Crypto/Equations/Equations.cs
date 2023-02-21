@@ -60,6 +60,19 @@ namespace Crypto
             return -1;
         }
 
+        public static double MistakeRSA(int number)
+        {
+            var primes = GetPrimeFactors(number);
+            if (primes.Length!=2)
+            {
+                return -1;
+            }
+            else
+            {
+                return Math.Pow(primes[0],-1)+Math.Pow(primes[1],-1);
+            }
+        }
+
         public static int[] GetPrimeFactors(int number)
         {
             var list = new List<int>();
@@ -88,7 +101,7 @@ namespace Crypto
 
         //Euler function
         #region 
-        static int Gcd(int a, int b)
+        public static int Gcd(int a, int b)
         {
             if (a == 0)
                 return b;
@@ -133,9 +146,9 @@ namespace Crypto
         public static int GetModded(int res, int mod) // надо переписать с оператором %
         {
             while (res < 0)
-                res += mod;
+                res =res%mod + mod;
             while (res > mod)
-                res -= mod;
+                res %= mod;
             return res;
         }
 
@@ -167,6 +180,29 @@ namespace Crypto
             return sum;
         }
 
+        public static double[] Probability(double a, double b) //Размер хеша и количество подборов для коллизии
+        {
+            double m = 0;
+            double t = 0;
+            double g = 0;
+            var prob = Math.Pow(a, -b);
+            if (-(int)b % 2 == 0)
+            {
+                m = (int)Math.Ceiling(Math.Log(prob, 2));
+                g = 1.41;
+                t = -(int)b / 2;
+            }
+            else
+            {
+                m = (int)Math.Ceiling(Math.Log(prob, 2));
+                g = 4.47;
+                t = -(int)b / 2;
+            }
+            m = (int) Math.Ceiling(Math.Log(prob, 2));
+            t = -(int)b / 2;
+            return new double[] { m, g, t };
+        }
+
         public static int MinimalCycleGroup(int field, int p=1) // Определение минимальной циклической подгруппы, образующей группу, большей чем p 
         {
             var primeNumbers = Equations.GetPrimeFactors(field - 1);
@@ -191,6 +227,60 @@ namespace Crypto
 
             }
             return -1;
+        }
+        
+        public static int[] SolveComparison(int a, int b, int mod) // Решение сравнения
+        {
+            while (a > mod)
+                a -= mod;
+            var solvNumber = Gcd(a, mod);
+            if (b % solvNumber == 0)
+            {
+                a /= solvNumber;
+                b /= solvNumber;
+                mod /= solvNumber;
+            }
+            var answer = new List<int>();
+            for (int i = 1; i < mod; i++)
+            {
+                if (a * i % mod == b)
+                    answer.Add(i);
+            }
+            if (answer.Count != 0) for (var i = 1; i < solvNumber; i++)
+                    answer.Add(answer[0] + mod * i);
+            return answer.Count != 0 ? answer.ToArray() : new int[] { -1 };
+        }
+
+        public static int SolveSystemOfComp(int[] data) //Решение системы сравнений
+        {
+            if (data.Length % 3 != 0)
+                return -1;
+            int m = 1;
+            for (int i = 0; i < data.Length / 3; i++)
+            {
+                m *= data[2 + i * 3];
+                if (data[0 + i * 3] == 1) continue;
+                else
+                {
+                    var d = new ReversingEl(data[2 + i * 3], data[0 + i * 3]).CheckRes();
+                    data[0 + i * 3] = 1;
+                    data[1 + i * 3] = data[1 + i * 3] * d % data[2 + i * 3];
+                }
+            }
+            var phi = new int[data.Length / 3];
+            var reversed = new int[data.Length / 3];
+            for (int i = 0; i < data.Length / 3; i++)
+            {
+                phi[i] = m / data[2 + i * 3];
+                if (Equations.GetModded(phi[i], data[2 + i * 3]) == 0) return -1;
+                reversed[i] = new ReversingEl(data[2 + i * 3], Equations.GetModded(phi[i], data[2 + i * 3])).CheckRes();
+            }
+            var result = 0;
+            for (int i = 0; i < data.Length / 3; i++)
+            {
+                result += phi[i] * reversed[i] * data[1 + i * 3];
+            }
+            return Equations.GetModded(result,m);
         }
     }
 }
